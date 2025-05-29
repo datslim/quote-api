@@ -36,8 +36,12 @@ func (h *QuoteHandler) GetAllQuotes(w http.ResponseWriter, r *http.Request) {
 		h.logger.Printf("Показ всех цитат автора (%s)\n", author)
 		quotes = h.store.GetByAuthor(author)
 	}
-	json.NewEncoder(w).Encode(quotes)
 
+	if err := json.NewEncoder(w).Encode(quotes); err != nil {
+		h.logger.Printf("Ошибка кодирования запроса: %v\n", err)
+		http.Error(w, "Ошибка сервера", http.StatusInternalServerError)
+		return
+	}
 	h.logger.Printf("Показано %d цитат. Время выполнения: %v\n", len(quotes), time.Since(start))
 }
 
@@ -50,7 +54,12 @@ func (h *QuoteHandler) GetRandomQuote(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusNotFound)
 		return
 	}
-	json.NewEncoder(w).Encode(quote)
+
+	if err := json.NewEncoder(w).Encode(quote); err != nil {
+		h.logger.Printf("Ошибка кодирования запроса: %v\n", err)
+		http.Error(w, "Ошибка сервера", http.StatusInternalServerError)
+		return
+	}
 
 	h.logger.Printf("Возвращена случайная цитата с ID: %d. Время выполнения: %v", quote.ID, time.Since(start))
 }
@@ -60,13 +69,20 @@ func (h *QuoteHandler) PostQuote(w http.ResponseWriter, r *http.Request) {
 	var quote models.Quote
 
 	if err := json.NewDecoder(r.Body).Decode(&quote); err != nil {
+		h.logger.Printf("Ошибка декодирования запроса: %v\n", err)
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
 	h.logger.Printf("Создание цитаты: автор '%s', текст '%s'", quote.Author, quote.Quote)
 	newQuote := h.store.Add(quote)
 	w.WriteHeader(http.StatusCreated)
-	json.NewEncoder(w).Encode(newQuote)
+
+	if err := json.NewEncoder(w).Encode(newQuote); err != nil {
+		h.logger.Printf("Ошибка кодирования запроса: %v\n", err)
+		http.Error(w, "Ошибка сервера", http.StatusInternalServerError)
+		return
+	}
+
 	h.logger.Printf("Создана цитата с ID: %d. Время выполнения: %v", newQuote.ID, time.Since(start))
 }
 

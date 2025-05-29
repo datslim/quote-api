@@ -20,6 +20,7 @@ func main() {
 	router.HandleFunc("/quotes", quoteHandler.GetAllQuotes).Methods("GET")
 	router.HandleFunc("/quotes/random", quoteHandler.GetRandomQuote).Methods("GET")
 	router.HandleFunc("/quotes/{id}", quoteHandler.DeleteQuote).Methods("DELETE")
-	logger.Printf("Сервер запущен.\n")
+	logger.Printf("Сервер запущен на порту 8080.\n")
+	logger.Printf("http://localhost:8080/quotes")
 	logger.Fatal(http.ListenAndServe(":8080", router))
 }
