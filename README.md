@@ -1,6 +1,6 @@
 # Quote API
 
-Простое REST API для работы с цитатами. Позволяет получать случайные цитаты, добавлять новые и  удалять существующие
+Просто IN-MEMORY REST API для работы с цитатами. Позволяет получать случайные цитаты, добавлять новые и  удалять существующие
 
 ##  Установка и запуск
 
@@ -39,4 +39,13 @@
 ### Удалить цитату по ID
 ```bash
     curl -X DELETE http://localhost:8080/quotes/1
+```
+
+
+## Структура проекта
+```
+    cmd/main.go                 — запуск сервера
+    internal/handlers/quotes.go — HTTP-хендлеры
+    internal/storage/memory.go  — in-memory хранилище
+    internal/model/quote.go     — модель Quote
 ```

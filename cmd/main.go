@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/datslim/quote-api/internal/handlers"
 	"github.com/datslim/quote-api/internal/storage"
@@ -11,8 +12,8 @@ import (
 
 func main() {
 	store := storage.NewMemoryStorage()
-
-	quoteHandler := handlers.NewQuoteHandler(store)
+	logger := log.New(os.Stdout, "QUOTE-API: ", log.LstdFlags|log.Lshortfile)
+	quoteHandler := handlers.NewQuoteHandler(store, logger)
 
 	router := mux.NewRouter().StrictSlash(true)
 	router.HandleFunc("/quotes", quoteHandler.PostQuote).Methods("POST")
