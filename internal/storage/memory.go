@@ -49,7 +49,7 @@ func (s *MemoryStorage) Add(quote models.Quote) models.Quote {
 	if len(s.quotes) == 0 {
 		currentID = 1
 	} else {
-		currentID = len(s.quotes) + 1
+		currentID = s.quotes[len(s.quotes)-1].ID + 1
 	}
 	quote.ID = currentID
 	s.quotes = append(s.quotes, quote)
