@@ -26,6 +26,12 @@
     go test -v ./unit-tests/
 ```
 
+### Проверить отправку запросов
+Для проверки отправки запросов предусмотрена схема для `Postman`.
+Для ее использования, после запуска сервера, нажмите Import внутри приложения Postman и выберите `postman_collection.json`
+После этого вы можете попробовать отправить тестовые запросы.  
+Если же в вашем случае этого сделать не удается, вы всегда можете воспользоваться `curl` с помощью приведенных ниже запросов.  
+
 ### Добавить новую цитату
 ```bash 
     curl -X POST http://localhost:8080/quotes \ -H "Content-Type: application/json" \ -d '{"author":"Confucius", "quote":"Life is simple, but we insist on making it complicated."}'
@@ -58,4 +64,5 @@
     internal/controller/routes.go  — описание всех endpoint'ов
     internal/model/quote.go        — модель Quote
     unit-tests/quotes_test.go      — unit-тесты
+    postman_collection.json        — json-схема для Postman
 ```

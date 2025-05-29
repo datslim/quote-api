@@ -1,0 +1,122 @@
+{
+    "info": {
+        "_postman_id": "quote-api-collection",
+        "name": "Quote API",
+        "description": "API для работы с цитатами",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Получить все цитаты",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "http://localhost:8080/quotes",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "8080",
+                    "path": [
+                        "quotes"
+                    ]
+                },
+                "description": "Получить список всех цитат"
+            }
+        },
+        {
+            "name": "Получить цитаты по автору",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "http://localhost:8080/quotes?author=Новый автор",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "8080",
+                    "path": [
+                        "quotes"
+                    ],
+                    "query": [
+                        {
+                            "key": "author",
+                            "value": "Новый автор"
+                        }
+                    ]
+                },
+                "description": "Получить список цитат конкретного автора"
+            }
+        },
+        {
+            "name": "Получить случайную цитату",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "http://localhost:8080/quotes/random",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "8080",
+                    "path": [
+                        "quotes",
+                        "random"
+                    ]
+                },
+                "description": "Получить случайную цитату"
+            }
+        },
+        {
+            "name": "Добавить цитату",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"author\": \"Новый автор\",\n    \"quote\": \"Новая цитата\"\n}"
+                },
+                "url": {
+                    "raw": "http://localhost:8080/quotes",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "8080",
+                    "path": [
+                        "quotes"
+                    ]
+                },
+                "description": "Добавить новую цитату"
+            }
+        },
+        {
+            "name": "Удалить цитату",
+            "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                    "raw": "http://localhost:8080/quotes/1",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "8080",
+                    "path": [
+                        "quotes",
+                        "1"
+                    ]
+                },
+                "description": "Удалить цитату по ID"
+            }
+        }
+    ]
+}
