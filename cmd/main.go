@@ -5,6 +5,7 @@ import (
 	"log"
 	"math/rand"
 	"net/http"
+	"slices"
 	"strconv"
 
 	"github.com/gorilla/mux"
@@ -87,7 +88,7 @@ func deleteQuote(w http.ResponseWriter, r *http.Request) {
 
 	for i, quote := range UserDatas {
 		if quote.ID == id {
-			UserDatas = append(UserDatas[:i], UserDatas[i+1:]...)
+			UserDatas = slices.Delete(UserDatas, i, i+1)
 			w.WriteHeader(http.StatusNoContent)
 			return
 		}
