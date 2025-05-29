@@ -24,7 +24,7 @@ func (s *MemoryStorage) GetAll() []models.Quote {
 
 func (s *MemoryStorage) GetRandom() (*models.Quote, error) {
 	if len(s.quotes) == 0 {
-		return nil, errors.New("No quotes available")
+		return nil, errors.New("no quotes available")
 	}
 	randomNumber := rand.Intn(len(s.quotes))
 	return &s.quotes[randomNumber], nil
