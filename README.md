@@ -44,8 +44,9 @@
 
 ## Структура проекта
 ```
-    cmd/main.go                 — запуск сервера
-    internal/handlers/quotes.go — HTTP-хендлеры
-    internal/storage/memory.go  — in-memory хранилище
-    internal/model/quote.go     — модель Quote
+    cmd/main.go                    — запуск сервера
+    internal/handlers/quotes.go    — HTTP-хендлеры
+    internal/storage/memory.go     — in-memory хранилище
+    internal/controller/routes.go  — описание всех endpoint'ов
+    internal/model/quote.go        — модель Quote
 ```
