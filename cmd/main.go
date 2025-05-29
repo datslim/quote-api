@@ -5,6 +5,7 @@ import (
 	"log"
 	"math/rand"
 	"net/http"
+	"strconv"
 
 	"github.com/gorilla/mux"
 )
@@ -77,5 +78,20 @@ func getRandomQuote(w http.ResponseWriter, r *http.Request) {
 }
 
 func deleteQuote(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	id, err := strconv.Atoi(vars["id"])
+	if err != nil {
+		http.Error(w, "Invalid ID", http.StatusBadRequest)
+		return
+	}
 
+	for i, quote := range UserDatas {
+		if quote.ID == id {
+			UserDatas = append(UserDatas[:i], UserDatas[i+1:]...)
+			w.WriteHeader(http.StatusNoContent)
+			return
+		}
+	}
+
+	http.Error(w, "Quote not found", http.StatusNotFound)
 }
