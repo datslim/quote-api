@@ -14,9 +14,17 @@
     go run cmd/main.go
     ```
 
+
 Сервер будет доступен по адресу: http://localhost:8080/quotes
 
 ## Использование
+
+### Запустить unit-тесты
+
+Для запуска unit-тестов используйте команду: 
+```bash
+    go test -v ./unit-tests/
+```
 
 ### Добавить новую цитату
 ```bash 
@@ -49,4 +57,5 @@
     internal/storage/memory.go     — in-memory хранилище
     internal/controller/routes.go  — описание всех endpoint'ов
     internal/model/quote.go        — модель Quote
+    unit-tests/quotes_test.go      — unit-тесты
 ```
